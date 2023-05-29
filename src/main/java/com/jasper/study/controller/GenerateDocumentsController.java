@@ -3,6 +3,7 @@ package com.jasper.study.controller;
 import com.jasper.study.dto.in.RequestDTO;
 import com.jasper.study.dto.out.ResponseDTO;
 import com.jasper.study.service.GenerateDocumentsService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +18,14 @@ public class GenerateDocumentsController {
     @Autowired
     private GenerateDocumentsService service;
 
-    @PostMapping
-    public ResponseEntity<ResponseDTO> generete(@RequestBody RequestDTO requestDTO){
-        return ResponseEntity.ok(service.generete(requestDTO));
+    @PostMapping("/base64")
+    public ResponseEntity<ResponseDTO> genereteBase64(@RequestBody RequestDTO requestDTO){
+        return ResponseEntity.ok(service.genereteBase64(requestDTO));
     }
+
+    @PostMapping("/file")
+    public void genereteFile(@RequestBody RequestDTO requestDTO, HttpServletResponse response){
+        service.prepereDonwload(response, requestDTO);
+    }
+
 }
