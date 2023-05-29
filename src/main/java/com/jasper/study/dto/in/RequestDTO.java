@@ -10,5 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class RequestDTO {
-    List<Field> fields = new ArrayList<>();
+    private String nameTemplate ;
+    private List<Field> fields = new ArrayList<>();
+
 }

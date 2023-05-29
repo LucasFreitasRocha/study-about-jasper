@@ -23,7 +23,7 @@ public class GenerateDocumentsService {
     private DownloadTamplateService downloadTamplateService;
 
     public ResponseDTO genereteBase64(RequestDTO requestDTO) {
-        File file = downloadTamplateService.downlaodTempalte("poc.jrxml");
+        File file = downloadTamplateService.downlaodTempalte(requestDTO.getNameTemplate());
         if (!Objects.isNull(file)) {
             ResponseDTO responseDTO = new ResponseDTO();
             try {
@@ -38,7 +38,7 @@ public class GenerateDocumentsService {
 
 
     public void prepereDonwload(HttpServletResponse response, RequestDTO requestDTO) {
-        File file = downloadTamplateService.downlaodTempalte("poc.jrxml");
+        File file = downloadTamplateService.downlaodTempalte(requestDTO.getNameTemplate());
         if (!Objects.isNull(file)) {
             CustomMultipartFile customMultipartFile = new CustomMultipartFile(generete(requestDTO, file.getAbsolutePath()), "teste", "pdf");
             try {
